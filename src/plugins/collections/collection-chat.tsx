@@ -11,6 +11,11 @@ import {
 import { ChatRoot } from "@/components/chat/chat-root";
 import { ChatSend } from "@/components/chat/chat-send";
 import {
+  ChatSkeleton,
+  ChatSkeletonComposer,
+  ChatSkeletonMessageList,
+} from "@/components/chat/chat-skeleton";
+import {
   ChatStarter,
   ChatStarterItem,
   ChatStarterItemDescription,
@@ -28,6 +33,11 @@ export const CollectionChat: FC<CollectionChatProps> = ({
 }) => {
   return (
     <ChatRoot className={cn("", className)} {...rest}>
+      <ChatSkeleton>
+        <ChatSkeletonMessageList />
+        <ChatSkeletonComposer />
+      </ChatSkeleton>
+
       <ChatLanding>
         <ChatLandingAvatar src="https://github.com/shadcn.png" />
         <ChatLandingTitle>Trading reports</ChatLandingTitle>

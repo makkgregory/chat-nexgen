@@ -1,19 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  createBrowserRouter,
-  type RouteObject,
-  RouterProvider,
-} from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import { QueryProvider } from "./components/providers/query-provider";
 import "./index.css";
-import * as plugins from "./plugins";
+import plugins from "./plugins";
 
-const router = createBrowserRouter(
-  Object.values(plugins).flatMap<RouteObject>((plugin) => plugin.routes ?? [])
-);
+const router = createBrowserRouter(plugins.routes);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryProvider>
+      <RouterProvider router={router} />
+    </QueryProvider>
   </StrictMode>
 );
