@@ -21,7 +21,6 @@ import {
   ChatStarterItemDescription,
   ChatStarterItemLabel,
 } from "@/components/chat/chat-starter";
-import { ChatStop } from "@/components/chat/chat-stop";
 import { ChatTools } from "@/components/chat/chat-tools";
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
@@ -75,7 +74,6 @@ export const CollectionChat: FC<CollectionChatProps> = ({
           <ChatComposer>
             <ChatTools />
             <ChatSend />
-            <ChatStop />
           </ChatComposer>
         </ChatLandingComposer>
       </ChatLanding>
@@ -84,7 +82,6 @@ export const CollectionChat: FC<CollectionChatProps> = ({
         <ChatComposer>
           <ChatTools />
           <ChatSend />
-          <ChatStop />
         </ChatComposer>
       </ChatContent>
     </ChatRoot>

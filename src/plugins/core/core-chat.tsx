@@ -14,7 +14,6 @@ import {
   ChatSkeletonComposer,
   ChatSkeletonMessageList,
 } from "@/components/chat/chat-skeleton";
-import { ChatStop } from "@/components/chat/chat-stop";
 import { ChatTools } from "@/components/chat/chat-tools";
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
@@ -40,7 +39,6 @@ export const CoreChat: FC<CoreChatProps> = ({ className, ...rest }) => {
           <ChatComposer>
             <ChatTools />
             <ChatSend />
-            <ChatStop />
           </ChatComposer>
         </ChatLandingComposer>
       </ChatLanding>
@@ -49,7 +47,6 @@ export const CoreChat: FC<CoreChatProps> = ({ className, ...rest }) => {
         <ChatComposer>
           <ChatTools />
           <ChatSend />
-          <ChatStop />
         </ChatComposer>
       </ChatContent>
     </ChatRoot>
