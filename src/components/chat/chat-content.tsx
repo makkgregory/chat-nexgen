@@ -1,5 +1,6 @@
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
+import { useChatStore } from "./store/chat-store";
 
 interface ChatContentProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -8,7 +9,11 @@ export const ChatContent: FC<ChatContentProps> = ({
   children,
   ...rest
 }) => {
-  return null;
+  const messages = useChatStore((state) => state.messages);
+
+  if (!messages.length) {
+    return null;
+  }
 
   return (
     <div

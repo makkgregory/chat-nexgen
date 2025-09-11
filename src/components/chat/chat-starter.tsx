@@ -1,5 +1,7 @@
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
+import { useChatStore } from "./store/chat-store";
+import { messageData } from "./store/message-data";
 
 interface ChatStarterProps extends HTMLAttributes<HTMLUListElement> {}
 
@@ -12,12 +14,27 @@ const ChatStarter: FC<ChatStarterProps> = ({ className, ...rest }) => {
 interface ChatStarterItemProps extends HTMLAttributes<HTMLLIElement> {}
 
 const ChatStarterItem: FC<ChatStarterItemProps> = ({ className, ...rest }) => {
+  const pushMessage = useChatStore((state) => state.pushMessage);
+
+  const handleSend = () => {
+    pushMessage({
+      role: "user",
+      content: "What is the capital of France?",
+    });
+
+    pushMessage({
+      role: "assistant",
+      content: messageData,
+    });
+  };
+
   return (
     <li
       className={cn(
         "rounded-xl p-4 bg-muted text-sm cursor-pointer hover:bg-muted/65 select-none",
         className
       )}
+      onClick={handleSend}
       {...rest}
     ></li>
   );

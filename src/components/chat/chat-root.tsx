@@ -1,5 +1,5 @@
 import { cn } from "@/lib/cn";
-import type { FC, HTMLAttributes } from "react";
+import { type FC, type HTMLAttributes } from "react";
 
 interface ChatRootProps extends HTMLAttributes<HTMLDivElement> {}
 

@@ -8,13 +8,10 @@ import {
   ChatLandingStarter,
   ChatLandingTitle,
 } from "@/components/chat/chat-landing";
+import { ChatMessageList } from "@/components/chat/chat-message-list";
 import { ChatRoot } from "@/components/chat/chat-root";
 import { ChatSend } from "@/components/chat/chat-send";
-import {
-  ChatSkeleton,
-  ChatSkeletonComposer,
-  ChatSkeletonMessageList,
-} from "@/components/chat/chat-skeleton";
+
 import {
   ChatStarter,
   ChatStarterItem,
@@ -33,11 +30,6 @@ export const CollectionChat: FC<CollectionChatProps> = ({
 }) => {
   return (
     <ChatRoot className={cn("", className)} {...rest}>
-      <ChatSkeleton>
-        <ChatSkeletonMessageList />
-        <ChatSkeletonComposer />
-      </ChatSkeleton>
-
       <ChatLanding>
         <ChatLandingAvatar src="https://github.com/shadcn.png" />
         <ChatLandingTitle>Trading reports</ChatLandingTitle>
@@ -79,6 +71,7 @@ export const CollectionChat: FC<CollectionChatProps> = ({
       </ChatLanding>
 
       <ChatContent>
+        <ChatMessageList />
         <ChatComposer>
           <ChatTools />
           <ChatSend />

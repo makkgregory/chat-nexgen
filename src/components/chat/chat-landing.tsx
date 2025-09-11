@@ -1,6 +1,7 @@
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useChatStore } from "./store/chat-store";
 
 interface ChatLandingProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -9,6 +10,12 @@ const ChatLanding: FC<ChatLandingProps> = ({
   children,
   ...rest
 }) => {
+  const messages = useChatStore((state) => state.messages);
+
+  if (messages.length) {
+    return null;
+  }
+
   return (
     <div
       className={cn(
