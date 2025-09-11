@@ -1,4 +1,5 @@
 import type { Plugin } from "@/lib/plugin";
+import { DashboardsTool } from "./dashboards-tool";
 
 export default {
   routes: [
@@ -10,4 +11,5 @@ export default {
       },
     },
   ],
+  tools: [DashboardsTool],
 } satisfies Plugin;

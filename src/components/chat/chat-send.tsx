@@ -1,18 +1,17 @@
 import { cn } from "@/lib/cn";
 import { IconSend } from "@tabler/icons-react";
-import type { ComponentProps, FC } from "react";
+import type { FC, HTMLAttributes } from "react";
 import { Button } from "../ui/button";
+import { ChatComposerPrimaryItem } from "./chat-composer";
 
-interface ChatSendProps extends ComponentProps<typeof Button> {}
+interface ChatSendProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const ChatSend: FC<ChatSendProps> = ({ className, ...rest }) => {
   return (
-    <Button
-      className={cn("absolute right-2 bottom-2", className)}
-      size="icon"
-      {...rest}
-    >
-      <IconSend />
-    </Button>
+    <ChatComposerPrimaryItem className={cn("", className)} {...rest}>
+      <Button size="icon">
+        <IconSend />
+      </Button>
+    </ChatComposerPrimaryItem>
   );
 };

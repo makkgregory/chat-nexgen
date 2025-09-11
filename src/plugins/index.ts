@@ -9,4 +9,5 @@ const plugins: Plugin[] = [core, collections, tokenCounter, dashboards];
 export default {
   routes: plugins.flatMap((plugin) => plugin.routes ?? []),
   composer: plugins.flatMap((plugin) => plugin.composer ?? []),
+  tools: plugins.flatMap((plugin) => plugin.tools ?? []),
 } satisfies Required<Plugin>;

@@ -22,6 +22,7 @@ import {
   ChatStarterItemLabel,
 } from "@/components/chat/chat-starter";
 import { ChatStop } from "@/components/chat/chat-stop";
+import { ChatTools } from "@/components/chat/chat-tools";
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
 
@@ -65,6 +66,7 @@ export const DashboardChat: FC<DashboardChatProps> = ({
 
         <ChatLandingComposer>
           <ChatComposer>
+            <ChatTools />
             <ChatSend />
             <ChatStop />
           </ChatComposer>
@@ -73,6 +75,7 @@ export const DashboardChat: FC<DashboardChatProps> = ({
 
       <ChatContent>
         <ChatComposer>
+          <ChatTools />
           <ChatSend />
           <ChatStop />
         </ChatComposer>

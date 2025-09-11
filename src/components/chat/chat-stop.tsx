@@ -1,21 +1,19 @@
 import { cn } from "@/lib/cn";
 import { IconSquareFilled } from "@tabler/icons-react";
-import type { ComponentProps, FC } from "react";
+import type { FC, HTMLAttributes } from "react";
 import { Button } from "../ui/button";
+import { ChatComposerPrimaryItem } from "./chat-composer";
 
-interface ChatStopProps extends ComponentProps<typeof Button> {}
+interface ChatStopProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const ChatStop: FC<ChatStopProps> = ({ className, ...rest }) => {
   return null;
 
   return (
-    <Button
-      variant="secondary"
-      className={cn("absolute right-2 bottom-2", className)}
-      size="icon"
-      {...rest}
-    >
-      <IconSquareFilled />
-    </Button>
+    <ChatComposerPrimaryItem className={cn("", className)} {...rest}>
+      <Button variant="secondary" size="icon">
+        <IconSquareFilled />
+      </Button>
+    </ChatComposerPrimaryItem>
   );
 };

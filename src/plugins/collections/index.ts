@@ -1,4 +1,6 @@
 import type { Plugin } from "@/lib/plugin";
+import { AgentModeTool } from "./agent-mode-tool";
+import { CollectionsTool } from "./collections-tool";
 
 export default {
   routes: [
@@ -10,4 +12,5 @@ export default {
       },
     },
   ],
+  tools: [CollectionsTool, AgentModeTool],
 } satisfies Plugin;
