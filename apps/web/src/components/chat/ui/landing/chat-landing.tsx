@@ -1,5 +1,5 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/cn";
+import { Avatar, AvatarImage } from "@chat-ai/ui";
 import { Slot } from "@radix-ui/react-slot";
 import type { FC, HTMLAttributes } from "react";
 import { useChat } from "../../context/chat-context";
