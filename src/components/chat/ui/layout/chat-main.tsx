@@ -1,17 +1,58 @@
 import { ResizablePanel } from "@/components/ui/resizable";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/cn";
-import { type ComponentProps, type FC } from "react";
+import {
+  useRef,
+  type ComponentProps,
+  type FC,
+  type HTMLAttributes,
+} from "react";
 
 interface ChatMainProps extends ComponentProps<typeof ResizablePanel> {}
 
-export const ChatMain: FC<ChatMainProps> = ({
+const ChatMain: FC<ChatMainProps> = ({ className, children, ...rest }) => {
+  return (
+    <ResizablePanel className={cn("flex flex-col", className)} {...rest}>
+      {children}
+    </ResizablePanel>
+  );
+};
+
+interface ChatMainScrollAreaProps extends ComponentProps<typeof ScrollArea> {}
+
+const ChatMainScrollArea: FC<ChatMainScrollAreaProps> = ({
+  className,
+  children,
+  ...rest
+}) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <ScrollArea
+      className={cn("flex-1 min-h-0", className)}
+      viewportRef={scrollRef}
+      {...rest}
+    >
+      <div className="mx-auto w-full max-w-4xl p-6 pb-[75vh]">{children}</div>
+    </ScrollArea>
+  );
+};
+
+interface ChatMainComposerProps extends HTMLAttributes<HTMLDivElement> {}
+
+const ChatMainComposer: FC<ChatMainComposerProps> = ({
   className,
   children,
   ...rest
 }) => {
   return (
-    <ResizablePanel className={cn("", className)} {...rest}>
+    <div
+      className={cn("w-full mx-auto max-w-4xl px-6 pb-2", className)}
+      {...rest}
+    >
       {children}
-    </ResizablePanel>
+    </div>
   );
 };
+
+export { ChatMain, ChatMainComposer, ChatMainScrollArea };

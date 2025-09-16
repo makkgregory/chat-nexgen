@@ -14,7 +14,10 @@ export const ChatUserMessage: FC<ChatUserMessageProps> = ({
 }) => {
   return (
     <div
-      className={cn("w-2/3 self-end rounded-xl p-4 bg-muted", className)}
+      className={cn(
+        "max-w-2/3 min-w-xs self-end rounded-xl px-4 py-2 bg-accent",
+        className
+      )}
       {...rest}
     >
       {message.parts.map((part, index) => (

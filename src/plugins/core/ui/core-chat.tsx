@@ -2,6 +2,7 @@ import {
   ChatAssistantMessage,
   ChatComposer,
   ChatComposerDescription,
+  ChatComposerFrame,
   ChatComposerInput,
   ChatHistory,
   ChatLanding,
@@ -11,6 +12,8 @@ import {
   ChatLandingTitle,
   ChatLayout,
   ChatMain,
+  ChatMainComposer,
+  ChatMainScrollArea,
   ChatRoot,
   ChatStarter,
   ChatStarterItem,
@@ -69,18 +72,22 @@ const CoreChatLayout: FC = (props) => {
   return (
     <ChatLayout direction="horizontal" {...props}>
       <ChatMain>
-        <ChatHistory>
-          {(message) => {
-            switch (message.role) {
-              case "user":
-                return <ChatUserMessage message={message} />;
-              case "assistant":
-                return <ChatAssistantMessage message={message} />;
-            }
-          }}
-        </ChatHistory>
-        <ChatThinking />
-        <CoreChatComposer />
+        <ChatMainScrollArea>
+          <ChatHistory>
+            {(message, props) => {
+              switch (message.role) {
+                case "user":
+                  return <ChatUserMessage message={message} {...props} />;
+                case "assistant":
+                  return <ChatAssistantMessage message={message} {...props} />;
+              }
+            }}
+          </ChatHistory>
+          <ChatThinking />
+        </ChatMainScrollArea>
+        <ChatMainComposer>
+          <CoreChatComposer />
+        </ChatMainComposer>
       </ChatMain>
     </ChatLayout>
   );
@@ -89,7 +96,9 @@ const CoreChatLayout: FC = (props) => {
 const CoreChatComposer: FC = (props) => {
   return (
     <ChatComposer {...props}>
-      <ChatComposerInput />
+      <ChatComposerFrame>
+        <ChatComposerInput />
+      </ChatComposerFrame>
       <ChatComposerDescription>
         AI can make mistakes. Please verify any information it provides.
       </ChatComposerDescription>

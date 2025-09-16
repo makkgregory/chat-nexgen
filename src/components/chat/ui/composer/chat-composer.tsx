@@ -23,7 +23,27 @@ const ChatComposer: FC<ChatComposerProps> = ({
   ...rest
 }) => {
   return (
-    <div className={cn("", className)} {...rest}>
+    <div className={cn("flex flex-col gap-1.5", className)} {...rest}>
+      {children}
+    </div>
+  );
+};
+
+interface ChatComposerFrameProps extends HTMLAttributes<HTMLDivElement> {}
+
+const ChatComposerFrame: FC<ChatComposerFrameProps> = ({
+  className,
+  children,
+  ...rest
+}) => {
+  return (
+    <div
+      className={cn(
+        "border-input rounded-xl bg-input/30 overflow-clip",
+        className
+      )}
+      {...rest}
+    >
       {children}
     </div>
   );
@@ -34,7 +54,7 @@ interface ChatComposerInputProps extends ComponentProps<typeof Textarea> {}
 const ChatComposerInput: FC<ChatComposerInputProps> = ({
   className,
   autoFocus = true,
-  minRows = 2,
+  minRows = 3,
   maxRows = 10,
   onChange,
   ...rest
@@ -68,7 +88,7 @@ const ChatComposerInput: FC<ChatComposerInputProps> = ({
       minRows={minRows}
       maxRows={maxRows}
       className={cn(
-        "focus-visible:ring-0 focus-visible:border-input resize-none rounded-xl shadow-md",
+        "focus-visible:ring-0 border-none resize-none rounded-none shadow-none bg-transparent dark:bg-transparent p-4",
         className
       )}
       value={value}
@@ -95,4 +115,9 @@ const ChatComposerDescription: FC<ChatComposerDescriptionProps> = ({
   );
 };
 
-export { ChatComposer, ChatComposerDescription, ChatComposerInput };
+export {
+  ChatComposer,
+  ChatComposerDescription,
+  ChatComposerFrame,
+  ChatComposerInput,
+};

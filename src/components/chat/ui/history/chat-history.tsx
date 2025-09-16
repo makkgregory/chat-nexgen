@@ -5,7 +5,10 @@ import type { Message } from "../../models/message";
 
 interface ChatHistoryProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
-  children: (message: Message) => ReactNode;
+  children: (
+    message: Message,
+    props: HTMLAttributes<HTMLDivElement>
+  ) => ReactNode;
 }
 
 export const ChatHistory: FC<ChatHistoryProps> = ({
@@ -18,7 +21,7 @@ export const ChatHistory: FC<ChatHistoryProps> = ({
   return (
     <div className={cn("flex flex-col gap-12", className)} {...rest}>
       {history.map((message) => (
-        <Fragment key={message.id}>{children(message)}</Fragment>
+        <Fragment key={message.id}>{children(message, {})}</Fragment>
       ))}
     </div>
   );
