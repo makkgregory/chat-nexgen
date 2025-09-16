@@ -1,6 +1,6 @@
-import { cn } from "./lib/cn";
 import * as React from "react";
 import TextareaAutosize from "react-textarea-autosize";
+import { cn } from "../lib/cn";
 
 function Textarea({
   className,
