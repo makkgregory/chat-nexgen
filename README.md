@@ -1,69 +1,53 @@
-# React + TypeScript + Vite
+# Chat AI - Turborepo Monorepo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project has been migrated to a Turborepo monorepo structure.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+chat-ai/
+├── apps/
+│   └── web/                    # React application (formerly the root project)
+├── packages/                   # Shared packages (empty for now)
+├── turbo.json                  # Turborepo configuration
+├── package.json                # Root package.json with workspaces
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+From the root directory, you can run:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `npm run dev` - Start development server for all apps
+- `npm run build` - Build all apps and packages
+- `npm run lint` - Lint all apps and packages
+- `npm run test` - Run tests for all apps and packages
+- `npm run clean` - Clean build artifacts
+
+## Development
+
+The main React application is now located in `apps/web/`. All the original source code, configurations, and dependencies have been moved there.
+
+To add new packages or apps:
+
+1. Add them to the appropriate `apps/` or `packages/` directory
+2. Make sure they have a `package.json` with a unique name
+3. Update scripts in the root `package.json` if needed
+
+## Migration Notes
+
+- All application code moved from root to `apps/web/`
+- Root `package.json` now manages workspaces
+- Turborepo handles task execution across the monorepo
+- TypeScript configuration updated for project references
+
+## Issues
+
+**Node.js Version**: This project requires Node.js 20.19+ or 22.12+ due to Vite dependencies. If you're using an older version, please upgrade Node.js to run the development server.
+
+**Build Errors**: There are some TypeScript errors that need to be resolved:
+
+- Import type issues in some UI components
+- React Markdown type compatibility issues
+
+These can be fixed by updating import statements and TypeScript configurations.
