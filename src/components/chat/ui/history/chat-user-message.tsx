@@ -37,6 +37,12 @@ const ChatUserMessageContent: FC<ChatUserMessageContentProps> = ({
   children,
   ...rest
 }) => {
+  const { editMode } = useChatUserMessage();
+
+  if (editMode) {
+    return null;
+  }
+
   return (
     <div className={cn("flex flex-col gap-2", className)} {...rest}>
       {children}
