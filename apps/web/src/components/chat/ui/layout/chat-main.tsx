@@ -1,5 +1,4 @@
-import { cn } from "@/lib/cn";
-import { ResizablePanel, ScrollArea } from "@chat-ai/ui";
+import { cn, ResizablePanel, ScrollArea } from "@chat-ai/ui";
 import {
   useRef,
   type ComponentProps,

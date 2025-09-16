@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@chat-ai/ui";
 import { type FC, type HTMLAttributes } from "react";
 import { ChatPromptProvider } from "./providers/chat-prompt-provider";
 import { ChatProvider } from "./providers/chat-provider";

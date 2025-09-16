@@ -1,5 +1,5 @@
 import type { UserMessage } from "@/components/chat/models/message";
-import { cn } from "@/lib/cn";
+import { cn } from "@chat-ai/ui";
 import type { FC, HTMLAttributes } from "react";
 import { useChatUserMessage } from "../../context/chat-user-message-context";
 import { ChatMessagePart } from "../message-parts/chat-message-part";

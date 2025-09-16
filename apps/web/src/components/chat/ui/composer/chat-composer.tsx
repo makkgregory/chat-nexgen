@@ -1,6 +1,5 @@
 import { messageTextPart } from "@/components/chat/models/message";
-import { cn } from "@/lib/cn";
-import { Textarea } from "@chat-ai/ui";
+import { cn, Textarea } from "@chat-ai/ui";
 import { debounce } from "lodash-es";
 import {
   useMemo,

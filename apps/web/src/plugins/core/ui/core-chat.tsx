@@ -41,7 +41,7 @@ import {
   ChatUserMessageFormSubmit,
   ChatUserMessageParts,
 } from "@/components/chat";
-import { cn } from "@/lib/cn";
+import { cn } from "@chat-ai/ui";
 import type { FC, HTMLAttributes } from "react";
 import { WeatherPrompt } from "../prompts/weather-prompt";
 

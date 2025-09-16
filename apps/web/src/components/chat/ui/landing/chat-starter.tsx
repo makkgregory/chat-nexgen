@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { cn } from "@chat-ai/ui";
 import type { FC, HTMLAttributes } from "react";
 import { renderToString } from "react-dom/server";
 import { useChat } from "../../context/chat-context";

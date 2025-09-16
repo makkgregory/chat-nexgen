@@ -1,5 +1,4 @@
-import { cn } from "@/lib/cn";
-import { Button } from "@chat-ai/ui";
+import { Button, cn } from "@chat-ai/ui";
 import type { ComponentProps, FC, HTMLAttributes } from "react";
 import { useChatUserMessage } from "../../context/chat-user-message-context";
 

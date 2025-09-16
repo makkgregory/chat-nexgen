@@ -1,5 +1,4 @@
-import { cn } from "@/lib/cn";
-import { ResizablePanel } from "@chat-ai/ui";
+import { cn, ResizablePanel } from "@chat-ai/ui";
 import type { ComponentProps, FC } from "react";
 
 interface ChatAsideProps extends ComponentProps<typeof ResizablePanel> {}

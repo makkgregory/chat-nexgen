@@ -1,5 +1,4 @@
-import { cn } from "@/lib/cn";
-import { ResizableHandle, ResizablePanelGroup } from "@chat-ai/ui";
+import { cn, ResizableHandle, ResizablePanelGroup } from "@chat-ai/ui";
 import type { ComponentProps, FC } from "react";
 import { useChat } from "../../context/chat-context";
 
