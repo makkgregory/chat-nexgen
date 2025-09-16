@@ -11,7 +11,7 @@ import {
   type FC,
   type HTMLAttributes,
 } from "react";
-import { useChat } from "../../context/chat-context";
+import { useChatPrompt } from "../../context/chat-prompt-context";
 import { getMessagePartsText } from "../../lib/get-message-parts-text";
 import { mergeMessageParts } from "../../lib/merge-message-parts";
 
@@ -23,7 +23,7 @@ const ChatComposer: FC<ChatComposerProps> = ({
   ...rest
 }) => {
   return (
-    <div className={cn("relative w-full", className)} {...rest}>
+    <div className={cn("", className)} {...rest}>
       {children}
     </div>
   );
@@ -39,7 +39,7 @@ const ChatComposerInput: FC<ChatComposerInputProps> = ({
   onChange,
   ...rest
 }) => {
-  const { prompt, updatePrompt } = useChat();
+  const { prompt, updatePrompt } = useChatPrompt();
   const [value, setValue] = useState("");
 
   const debounceUpdatePrompt = useMemo(

@@ -1,8 +1,8 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/cn";
+import { Slot } from "@radix-ui/react-slot";
 import type { FC, HTMLAttributes } from "react";
 import { useChat } from "../../context/chat-context";
-
 interface ChatLandingProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ChatLanding: FC<ChatLandingProps> = ({
@@ -12,14 +12,14 @@ const ChatLanding: FC<ChatLandingProps> = ({
 }) => {
   const { history } = useChat();
 
-  if (!history.length) {
+  if (history.length) {
     return null;
   }
 
   return (
     <div
       className={cn(
-        "flex flex-col items-center pt-48 max-w-3xl mx-auto h-full",
+        "flex flex-col items-center pt-48 max-w-3xl mx-auto size-full",
         className
       )}
       {...rest}
@@ -95,9 +95,9 @@ const ChatLandingComposer: FC<ChatLandingComposerProps> = ({
   ...rest
 }) => {
   return (
-    <div className={cn("mt-8 w-full", className)} {...rest}>
+    <Slot className={cn("mt-8 w-full", className)} {...rest}>
       {children}
-    </div>
+    </Slot>
   );
 };
 

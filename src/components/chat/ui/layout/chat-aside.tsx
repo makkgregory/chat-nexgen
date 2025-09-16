@@ -1,4 +1,4 @@
-import { ResizableHandle, ResizablePanel } from "@/components/ui/resizable";
+import { ResizablePanel } from "@/components/ui/resizable";
 import { cn } from "@/lib/cn";
 import type { ComponentProps, FC } from "react";
 
@@ -10,12 +10,8 @@ export const ChatAside: FC<ChatAsideProps> = ({
   ...rest
 }) => {
   return (
-    <>
-      <ResizableHandle />
-      <ResizablePanel className={cn("", className)} {...rest}>
-        {children}
-      </ResizablePanel>
-      <ResizableHandle />
-    </>
+    <ResizablePanel className={cn("", className)} {...rest}>
+      {children}
+    </ResizablePanel>
   );
 };

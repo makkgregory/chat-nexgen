@@ -1,7 +1,8 @@
 import {
-  ChatAside,
+  ChatAssistantMessage,
   ChatComposer,
   ChatComposerDescription,
+  ChatComposerInput,
   ChatHistory,
   ChatLanding,
   ChatLandingAvatar,
@@ -15,6 +16,8 @@ import {
   ChatStarterItem,
   ChatStarterItemDescription,
   ChatStarterItemLabel,
+  ChatThinking,
+  ChatUserMessage,
 } from "@/components/chat";
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
@@ -31,9 +34,9 @@ export const CoreChat: FC<CoreChatProps> = ({ className, ...rest }) => {
   );
 };
 
-const CoreChatLanding: FC = () => {
+const CoreChatLanding: FC = (props) => {
   return (
-    <ChatLanding>
+    <ChatLanding {...props}>
       <ChatLandingAvatar src="https://github.com/shadcn.png" />
       <ChatLandingTitle>What can I help you with?</ChatLandingTitle>
       <ChatLandingDescription>
@@ -49,9 +52,9 @@ const CoreChatLanding: FC = () => {
   );
 };
 
-const CoreChatStarter: FC = () => {
+const CoreChatStarter: FC = (props) => {
   return (
-    <ChatStarter>
+    <ChatStarter {...props}>
       <ChatStarterItem prompt={WeatherPrompt}>
         <ChatStarterItemLabel>Weather</ChatStarterItemLabel>
         <ChatStarterItemDescription>
@@ -62,21 +65,31 @@ const CoreChatStarter: FC = () => {
   );
 };
 
-const CoreChatLayout: FC = () => {
+const CoreChatLayout: FC = (props) => {
   return (
-    <ChatLayout direction="horizontal">
+    <ChatLayout direction="horizontal" {...props}>
       <ChatMain>
-        <ChatHistory />
+        <ChatHistory>
+          {(message) => {
+            switch (message.role) {
+              case "user":
+                return <ChatUserMessage message={message} />;
+              case "assistant":
+                return <ChatAssistantMessage message={message} />;
+            }
+          }}
+        </ChatHistory>
+        <ChatThinking />
         <CoreChatComposer />
       </ChatMain>
-      <ChatAside maxSize={75} />
     </ChatLayout>
   );
 };
 
-const CoreChatComposer: FC = () => {
+const CoreChatComposer: FC = (props) => {
   return (
-    <ChatComposer>
+    <ChatComposer {...props}>
+      <ChatComposerInput />
       <ChatComposerDescription>
         AI can make mistakes. Please verify any information it provides.
       </ChatComposerDescription>

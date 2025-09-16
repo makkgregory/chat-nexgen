@@ -1,6 +1,7 @@
 import { cn } from "@/lib/cn";
 import { type FC, type HTMLAttributes } from "react";
-import { ChatContext } from "../context/chat-context";
+import { ChatPromptProvider } from "./providers/chat-prompt-provider";
+import { ChatProvider } from "./providers/chat-provider";
 
 interface ChatRootProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -10,10 +11,12 @@ export const ChatRoot: FC<ChatRootProps> = ({
   ...rest
 }) => {
   return (
-    <ChatContext value={{ loading: true, history: [] }}>
-      <div className={cn("size-full", className)} {...rest}>
-        {children}
-      </div>
-    </ChatContext>
+    <ChatProvider>
+      <ChatPromptProvider>
+        <div className={cn("size-full", className)} {...rest}>
+          {children}
+        </div>
+      </ChatPromptProvider>
+    </ChatProvider>
   );
 };

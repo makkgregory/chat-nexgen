@@ -5,6 +5,7 @@ export * from "./ui/composer/chat-send";
 export * from "./ui/composer/chat-stop";
 export * from "./ui/history/chat-assistant-message";
 export * from "./ui/history/chat-history";
+export * from "./ui/history/chat-thinking";
 export * from "./ui/history/chat-user-message";
 export * from "./ui/landing/chat-landing";
 export * from "./ui/landing/chat-starter";

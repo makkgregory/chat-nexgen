@@ -37,10 +37,26 @@ export const UserMessage = z.object({
 
 export type UserMessage = z.infer<typeof UserMessage>;
 
+export const userMessage = (
+  message: Omit<UserMessage, "id" | "role">
+): UserMessage => ({
+  id: crypto.randomUUID(),
+  role: "user",
+  ...message,
+});
+
 export const AssistantMessage = z.object({
   id: z.string(),
   role: z.literal("assistant"),
   parts: z.array(MessagePart),
+});
+
+export const assistantMessage = (
+  message: Omit<AssistantMessage, "id" | "role">
+): AssistantMessage => ({
+  id: crypto.randomUUID(),
+  role: "assistant",
+  ...message,
 });
 
 export type AssistantMessage = z.infer<typeof AssistantMessage>;

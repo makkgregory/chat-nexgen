@@ -13,7 +13,7 @@ export const ChatMessageMarkdownPart: FC<ChatMessageMarkdownPartProps> = ({
   ...rest
 }) => {
   return (
-    <div className={cn("prose", className)} {...rest}>
+    <div className={cn("prose-sm", className)} {...rest}>
       <ReactMarkdown
         children={content}
         components={plugins.content}

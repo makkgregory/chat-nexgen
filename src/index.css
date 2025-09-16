@@ -129,7 +129,11 @@
     background: transparent;
   }
   .scrollbar::-webkit-scrollbar-thumb {
-    background-color: theme("colors.gray.300");
+    background-color: theme("colors.zinc.300");
+    border-radius: 9999px;
+  }
+  .dark .scrollbar::-webkit-scrollbar-thumb {
+    background-color: theme("colors.zinc.700");
     border-radius: 9999px;
   }
 }

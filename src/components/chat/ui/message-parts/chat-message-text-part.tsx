@@ -11,7 +11,7 @@ export const ChatMessageTextPart: FC<ChatMessageTextPartProps> = ({
   ...rest
 }) => {
   return (
-    <div className={cn("prose", className)} {...rest}>
+    <div className={cn("prose-sm", className)} {...rest}>
       <p>{content}</p>
     </div>
   );
