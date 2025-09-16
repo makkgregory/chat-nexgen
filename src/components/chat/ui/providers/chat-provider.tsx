@@ -1,7 +1,9 @@
-import { type FC, type PropsWithChildren } from "react";
+import { useRef, type FC, type PropsWithChildren } from "react";
 import { ChatContext } from "../../context/chat-context";
 import { useChatReducer } from "../../hooks/use-chat-reducer";
+import { streamText } from "../../lib/stream-text";
 import {
+  assistantMessage,
   userMessage,
   type Message,
   type MessagePart,
@@ -11,14 +13,34 @@ interface ChatProviderProps extends PropsWithChildren {}
 
 export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
   const [state, dispatch] = useChatReducer();
+  const controllerRef = useRef(new AbortController());
 
-  const send = (parts: MessagePart[]) => {
-    dispatch({ type: "setStreaming", streaming: true });
-    dispatch({ type: "pushMessage", message: userMessage({ parts }) });
+  const send = async (parts: MessagePart[]) => {
+    const controller = new AbortController();
+    const prompt = userMessage({ parts });
+    const response = assistantMessage({ streaming: true, parts: [] });
+    const history = [...state.history, prompt];
+    const stream = streamText({
+      history,
+      signal: controller.signal,
+    });
+
+    controllerRef.current = controller;
+    dispatch({ type: "pushMessages", message: [prompt, response] });
+
+    for await (const part of stream) {
+      dispatch({
+        type: "pushMessageParts",
+        message: response,
+        parts: [part],
+      });
+    }
+
+    dispatch({ type: "finishMessage", message: response });
   };
 
   const edit = (message: Message, parts: MessagePart[]) => {
-    dispatch({ type: "updateMessage", message: { ...message, parts } });
+    dispatch({ type: "updateMessageParts", message, parts });
   };
 
   const deleteMessage = (message: Message) => {
@@ -26,11 +48,11 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
   };
 
   const retry = (message: Message) => {
-    dispatch({ type: "setStreaming", streaming: true });
+    throw new Error("Not implemented");
   };
 
   const stop = () => {
-    dispatch({ type: "setStreaming", streaming: false });
+    controllerRef.current.abort();
   };
 
   return (

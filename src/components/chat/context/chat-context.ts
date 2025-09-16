@@ -3,7 +3,6 @@ import { createContext, use } from "react";
 
 export interface ChatContext {
   loading: boolean;
-  streaming: boolean;
   history: Message[];
   send: (content: MessagePart[]) => void;
   edit: (message: Message, content: MessagePart[]) => void;

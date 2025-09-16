@@ -1,5 +1,6 @@
 import {
   ChatAssistantMessage,
+  ChatAssistantThinking,
   ChatComposer,
   ChatComposerDescription,
   ChatComposerFrame,
@@ -19,7 +20,6 @@ import {
   ChatStarterItem,
   ChatStarterItemDescription,
   ChatStarterItemLabel,
-  ChatThinking,
   ChatUserMessage,
 } from "@/components/chat";
 import { cn } from "@/lib/cn";
@@ -79,11 +79,14 @@ const CoreChatLayout: FC = (props) => {
                 case "user":
                   return <ChatUserMessage message={message} {...props} />;
                 case "assistant":
-                  return <ChatAssistantMessage message={message} {...props} />;
+                  return (
+                    <ChatAssistantMessage message={message} {...props}>
+                      <ChatAssistantThinking />
+                    </ChatAssistantMessage>
+                  );
               }
             }}
           </ChatHistory>
-          <ChatThinking />
         </ChatMainScrollArea>
         <ChatMainComposer>
           <CoreChatComposer />

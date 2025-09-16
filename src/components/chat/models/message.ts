@@ -48,6 +48,7 @@ export const userMessage = (
 export const AssistantMessage = z.object({
   id: z.string(),
   role: z.literal("assistant"),
+  streaming: z.boolean(),
   parts: z.array(MessagePart),
 });
 

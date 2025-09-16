@@ -1,55 +1,66 @@
 import { useReducer } from "react";
-import {
-  assistantMessage,
-  messageTextPart,
-  userMessage,
-  type Message,
-} from "../models/message";
+import { mergeMessageParts } from "../lib/merge-message-parts";
+import { MessagePart, type Message } from "../models/message";
 
 export interface ChatState {
   loading: boolean;
-  streaming: boolean;
   history: Message[];
 }
 
 const initialState: ChatState = {
   loading: false,
-  streaming: false,
-  history: Array.from({ length: 20 }).flatMap(() => [
-    userMessage({ parts: [messageTextPart("Hello")] }),
-    assistantMessage({ parts: [messageTextPart("World")] }),
-  ]),
+  history: [],
 };
 
 export type ChatAction =
   | { type: "setLoading"; loading: boolean }
-  | { type: "setStreaming"; streaming: boolean }
-  | { type: "pushMessage"; message: Message }
-  | { type: "updateMessage"; message: Message }
+  | { type: "pushMessages"; message: Message[] }
+  | { type: "pushMessageParts"; message: Message; parts: MessagePart[] }
+  | { type: "updateMessageParts"; message: Message; parts: MessagePart[] }
+  | { type: "finishMessage"; message: Message }
   | { type: "deleteMessage"; message: Message };
 
 const chatReducer = (state: ChatState, action: ChatAction): ChatState => {
   switch (action.type) {
     case "setLoading":
       return { ...state, loading: action.loading };
-    case "setStreaming":
-      return { ...state, streaming: action.streaming };
-    case "pushMessage":
-      return { ...state, history: [...state.history, action.message] };
-    case "updateMessage":
+    case "pushMessages":
+      return { ...state, history: [...state.history, ...action.message] };
+    case "updateMessageParts":
       return {
         ...state,
         history: state.history.map((m) =>
-          m.id === action.message.id ? action.message : m
+          m.id === action.message.id ? { ...m, parts: action.parts } : m
         ),
+      };
+    case "pushMessageParts":
+      return {
+        ...state,
+        history: state.history.map((m) => {
+          if (m.id === action.message.id) {
+            return {
+              ...m,
+              parts: mergeMessageParts([...m.parts, ...action.parts]),
+            };
+          }
+          return m;
+        }),
+      };
+    case "finishMessage":
+      return {
+        ...state,
+        history: state.history.map((m) => {
+          if (m.id === action.message.id) {
+            return { ...m, streaming: false };
+          }
+          return m;
+        }),
       };
     case "deleteMessage":
       return {
         ...state,
         history: state.history.filter((m) => m.id !== action.message.id),
       };
-    default:
-      return state;
   }
 };
 

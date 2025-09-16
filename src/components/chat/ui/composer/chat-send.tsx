@@ -8,15 +8,16 @@ import { useChatPrompt } from "../../context/chat-prompt-context";
 interface ChatSendProps extends ComponentProps<typeof Button> {}
 
 export const ChatSend: FC<ChatSendProps> = ({ className, ...rest }) => {
-  const { streaming, send } = useChat();
+  const { history, send } = useChat();
   const { prompt, clearPrompt } = useChatPrompt();
+  const top = history.at(-1);
 
   const handleSend = () => {
     send(prompt);
     clearPrompt();
   };
 
-  if (streaming) {
+  if (top?.role === "assistant" && top.streaming) {
     return null;
   }
 

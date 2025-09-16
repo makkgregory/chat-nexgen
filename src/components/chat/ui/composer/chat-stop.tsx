@@ -7,9 +7,10 @@ import { useChat } from "../../context/chat-context";
 interface ChatStopProps extends ComponentProps<typeof Button> {}
 
 export const ChatStop: FC<ChatStopProps> = ({ className, ...rest }) => {
-  const { streaming, stop } = useChat();
+  const { history, stop } = useChat();
+  const top = history.at(-1);
 
-  if (!streaming) {
+  if (top?.role !== "assistant" || !top.streaming) {
     return null;
   }
 
