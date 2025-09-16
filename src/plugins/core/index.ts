@@ -1,6 +1,5 @@
 import type { Plugin } from "@/lib/plugin";
-import { CoreChat } from "./core-chat";
-import { CoreTool } from "./core-tool";
+import { CoreChat } from "./ui/core-chat";
 
 export default {
   routes: [
@@ -9,5 +8,4 @@ export default {
       Component: CoreChat,
     },
   ],
-  tools: [CoreTool],
 } satisfies Plugin;
