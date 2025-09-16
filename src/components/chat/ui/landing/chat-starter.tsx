@@ -20,7 +20,7 @@ const ChatStarterItem: FC<ChatStarterItemProps> = ({
   className,
   ...rest
 }) => {
-  const { send } = useChat();
+  const { sendMessage: send } = useChat();
 
   const handleSend = async () => {
     const prompt = renderToString(<Prompt />);

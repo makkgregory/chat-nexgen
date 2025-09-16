@@ -3,16 +3,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/cn";
 import { debounce } from "lodash-es";
 import {
-  useEffect,
   useMemo,
+  useRef,
   useState,
   type ChangeEvent,
   type ComponentProps,
   type FC,
+  type FormEvent,
   type HTMLAttributes,
+  type KeyboardEvent,
 } from "react";
+import { useChat } from "../../context/chat-context";
 import { useChatPrompt } from "../../context/chat-prompt-context";
-import { getMessagePartsText } from "../../lib/get-message-parts-text";
 import { mergeMessageParts } from "../../lib/merge-message-parts";
 
 interface ChatComposerProps extends HTMLAttributes<HTMLDivElement> {}
@@ -29,9 +31,9 @@ const ChatComposer: FC<ChatComposerProps> = ({
   );
 };
 
-interface ChatComposerFrameProps extends HTMLAttributes<HTMLDivElement> {}
+interface ChatComposerContentProps extends HTMLAttributes<HTMLDivElement> {}
 
-const ChatComposerFrame: FC<ChatComposerFrameProps> = ({
+const ChatComposerContent: FC<ChatComposerContentProps> = ({
   className,
   children,
   ...rest
@@ -54,18 +56,35 @@ interface ChatComposerInputProps extends ComponentProps<typeof Textarea> {}
 const ChatComposerInput: FC<ChatComposerInputProps> = ({
   className,
   autoFocus = true,
-  minRows = 3,
+  minRows = 2,
   maxRows = 10,
   onChange,
   ...rest
 }) => {
-  const { prompt, updatePrompt } = useChatPrompt();
+  const formRef = useRef<HTMLFormElement>(null);
+  const { prompt, isPromptEmpty, updatePrompt, clearPrompt } = useChatPrompt();
+  const { sendMessage: send } = useChat();
   const [value, setValue] = useState("");
 
   const debounceUpdatePrompt = useMemo(
     () => debounce(updatePrompt, 300),
     [updatePrompt]
   );
+
+  const handleKeyDown = async (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    switch (e.key) {
+      case "Enter": {
+        if (e.shiftKey) {
+          return;
+        }
+        e.preventDefault();
+        debounceUpdatePrompt.flush();
+        await new Promise((resolve) => setTimeout(resolve));
+        formRef.current?.requestSubmit();
+        return;
+      }
+    }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -77,24 +96,45 @@ const ChatComposerInput: FC<ChatComposerInputProps> = ({
     });
   };
 
-  useEffect(() => {
-    setValue(getMessagePartsText(prompt));
-  }, [prompt]);
+  const handleSend = (e: FormEvent) => {
+    e.preventDefault();
+    if (!isPromptEmpty) {
+      send(prompt);
+      clearPrompt();
+    }
+  };
 
   return (
-    <Textarea
-      placeholder="Ask anything"
-      autoFocus={autoFocus}
-      minRows={minRows}
-      maxRows={maxRows}
-      className={cn(
-        "focus-visible:ring-0 border-none resize-none rounded-none shadow-none bg-transparent dark:bg-transparent p-4",
-        className
-      )}
-      value={value}
-      onChange={handleChange}
-      {...rest}
-    />
+    <form className="contents" ref={formRef} onSubmit={handleSend}>
+      <Textarea
+        placeholder="Ask anything"
+        autoFocus={autoFocus}
+        minRows={minRows}
+        maxRows={maxRows}
+        className={cn(
+          "focus-visible:ring-0 border-none resize-none rounded-none shadow-none bg-transparent dark:bg-transparent p-4",
+          className
+        )}
+        onKeyDown={handleKeyDown}
+        value={value}
+        onChange={handleChange}
+        {...rest}
+      />
+    </form>
+  );
+};
+
+interface ChatComposerFooterProps extends HTMLAttributes<HTMLDivElement> {}
+
+const ChatComposerFooter: FC<ChatComposerFooterProps> = ({
+  className,
+  children,
+  ...rest
+}) => {
+  return (
+    <div className={cn("flex items-center px-2 pb-2", className)} {...rest}>
+      {children}
+    </div>
   );
 };
 
@@ -117,7 +157,8 @@ const ChatComposerDescription: FC<ChatComposerDescriptionProps> = ({
 
 export {
   ChatComposer,
+  ChatComposerContent,
   ChatComposerDescription,
-  ChatComposerFrame,
+  ChatComposerFooter,
   ChatComposerInput,
 };

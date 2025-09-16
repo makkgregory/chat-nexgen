@@ -15,7 +15,7 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
   const [state, dispatch] = useChatReducer();
   const controllerRef = useRef(new AbortController());
 
-  const send = async (parts: MessagePart[]) => {
+  const sendMessage = async (parts: MessagePart[]) => {
     const controller = new AbortController();
     const prompt = userMessage({ parts });
     const response = assistantMessage({ streaming: true, parts: [] });
@@ -39,7 +39,7 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
     dispatch({ type: "finishMessage", message: response });
   };
 
-  const edit = (message: Message, parts: MessagePart[]) => {
+  const editMessage = (message: Message, parts: MessagePart[]) => {
     dispatch({ type: "updateMessageParts", message, parts });
   };
 
@@ -47,11 +47,12 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
     dispatch({ type: "deleteMessage", message });
   };
 
-  const retry = (message: Message) => {
+  const retryMessage = (message: Message) => {
+    console.log("retry", message);
     throw new Error("Not implemented");
   };
 
-  const stop = () => {
+  const stopGenerating = () => {
     controllerRef.current.abort();
   };
 
@@ -59,11 +60,11 @@ export const ChatProvider: FC<ChatProviderProps> = ({ children }) => {
     <ChatContext
       value={{
         ...state,
-        send,
-        edit,
-        delete: deleteMessage,
-        retry,
-        stop,
+        sendMessage,
+        editMessage,
+        deleteMessage,
+        retryMessage,
+        stopGenerating,
       }}
     >
       {children}

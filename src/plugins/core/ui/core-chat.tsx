@@ -1,10 +1,19 @@
 import {
   ChatAssistantMessage,
-  ChatAssistantThinking,
+  ChatAssistantMessageContent,
+  ChatAssistantMessageDelete,
+  ChatAssistantMessageFooter,
+  ChatAssistantMessageNoContent,
+  ChatAssistantMessageParts,
+  ChatAssistantMessageRetry,
+  ChatAssistantMessageThinking,
   ChatComposer,
+  ChatComposerContent,
   ChatComposerDescription,
-  ChatComposerFrame,
+  ChatComposerFooter,
   ChatComposerInput,
+  ChatComposerSend,
+  ChatComposerStop,
   ChatHistory,
   ChatLanding,
   ChatLandingAvatar,
@@ -21,6 +30,16 @@ import {
   ChatStarterItemDescription,
   ChatStarterItemLabel,
   ChatUserMessage,
+  ChatUserMessageContent,
+  ChatUserMessageEdit,
+  ChatUserMessageFooter,
+  ChatUserMessageForm,
+  ChatUserMessageFormCancel,
+  ChatUserMessageFormContent,
+  ChatUserMessageFormFooter,
+  ChatUserMessageFormInput,
+  ChatUserMessageFormSubmit,
+  ChatUserMessageParts,
 } from "@/components/chat";
 import { cn } from "@/lib/cn";
 import type { FC, HTMLAttributes } from "react";
@@ -77,11 +96,38 @@ const CoreChatLayout: FC = (props) => {
             {(message, props) => {
               switch (message.role) {
                 case "user":
-                  return <ChatUserMessage message={message} {...props} />;
+                  return (
+                    <ChatUserMessage message={message} {...props}>
+                      <ChatUserMessageContent>
+                        <ChatUserMessageParts />
+                        <ChatUserMessageFooter>
+                          <ChatUserMessageEdit />
+                        </ChatUserMessageFooter>
+                      </ChatUserMessageContent>
+
+                      <ChatUserMessageForm>
+                        <ChatUserMessageFormContent>
+                          <ChatUserMessageFormInput />
+                          <ChatUserMessageFormFooter>
+                            <ChatUserMessageFormCancel />
+                            <ChatUserMessageFormSubmit />
+                          </ChatUserMessageFormFooter>
+                        </ChatUserMessageFormContent>
+                      </ChatUserMessageForm>
+                    </ChatUserMessage>
+                  );
                 case "assistant":
                   return (
                     <ChatAssistantMessage message={message} {...props}>
-                      <ChatAssistantThinking />
+                      <ChatAssistantMessageContent>
+                        <ChatAssistantMessageThinking />
+                        <ChatAssistantMessageParts />
+                        <ChatAssistantMessageNoContent />
+                        <ChatAssistantMessageFooter>
+                          <ChatAssistantMessageRetry className="-ml-2" />
+                          <ChatAssistantMessageDelete />
+                        </ChatAssistantMessageFooter>
+                      </ChatAssistantMessageContent>
                     </ChatAssistantMessage>
                   );
               }
@@ -99,9 +145,14 @@ const CoreChatLayout: FC = (props) => {
 const CoreChatComposer: FC = (props) => {
   return (
     <ChatComposer {...props}>
-      <ChatComposerFrame>
+      <ChatComposerContent>
         <ChatComposerInput />
-      </ChatComposerFrame>
+        <ChatComposerFooter>
+          <span className="flex-1" />
+          <ChatComposerSend />
+          <ChatComposerStop />
+        </ChatComposerFooter>
+      </ChatComposerContent>
       <ChatComposerDescription>
         AI can make mistakes. Please verify any information it provides.
       </ChatComposerDescription>

@@ -4,11 +4,11 @@ import { createContext, use } from "react";
 export interface ChatContext {
   loading: boolean;
   history: Message[];
-  send: (content: MessagePart[]) => void;
-  edit: (message: Message, content: MessagePart[]) => void;
-  delete: (message: Message) => void;
-  retry: (message: Message) => void;
-  stop: () => void;
+  sendMessage: (content: MessagePart[]) => void;
+  editMessage: (message: Message, content: MessagePart[]) => void;
+  deleteMessage: (message: Message) => void;
+  retryMessage: (message: Message) => void;
+  stopGenerating: () => void;
 }
 
 export const ChatContext = createContext<ChatContext | null>(null);

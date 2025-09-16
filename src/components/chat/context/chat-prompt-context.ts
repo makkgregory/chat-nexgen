@@ -3,6 +3,7 @@ import { createContext, use } from "react";
 
 export interface ChatPromptContext {
   prompt: MessagePart[];
+  isPromptEmpty: boolean;
   updatePrompt: (callback: (content: MessagePart[]) => MessagePart[]) => void;
   clearPrompt: () => void;
 }

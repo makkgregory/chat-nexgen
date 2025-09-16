@@ -56,11 +56,16 @@ const chatReducer = (state: ChatState, action: ChatAction): ChatState => {
           return m;
         }),
       };
-    case "deleteMessage":
+    case "deleteMessage": {
+      const index = state.history.findIndex((x) => x.id === action.message.id);
+      if (index < 0) {
+        return state;
+      }
       return {
         ...state,
-        history: state.history.filter((m) => m.id !== action.message.id),
+        history: state.history.slice(0, index),
       };
+    }
   }
 };
 
