@@ -2,7 +2,7 @@ import {
   messageMarkdownPart,
   type Message,
   type MessagePart,
-} from "@/components/chat/models/message";
+} from "../models/message";
 import { streamText as aiStreamText, type ModelMessage } from "ai";
 import { createOllama } from "ollama-ai-provider-v2";
 import { getMessagePartsText } from "./get-message-parts-text";

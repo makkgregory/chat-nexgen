@@ -6,6 +6,9 @@
     },
     {
       "path": "./packages/ui"
+    },
+    {
+      "path": "./packages/chat"
     }
   ]
 }

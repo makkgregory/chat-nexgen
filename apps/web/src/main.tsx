@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { QueryProvider } from "./components/providers/query-provider";
+import { QueryProvider } from "./components/query-provider";
 import "./index.css";
 import plugins from "./plugins";
 

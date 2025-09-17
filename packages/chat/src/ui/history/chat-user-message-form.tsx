@@ -1,5 +1,10 @@
 import { Button, cn } from "@chat-ai/ui";
-import type { ComponentProps, FC, HTMLAttributes } from "react";
+import type {
+  ComponentProps,
+  FC,
+  FormHTMLAttributes,
+  HTMLAttributes,
+} from "react";
 import { useChatUserMessage } from "../../context/chat-user-message-context";
 
 interface ChatUserMessageFormProps extends HTMLAttributes<HTMLDivElement> {}
@@ -15,7 +20,7 @@ const ChatUserMessageForm: FC<ChatUserMessageFormProps> = ({ children }) => {
 };
 
 interface ChatUserMessageFormContentProps
-  extends HTMLAttributes<HTMLDivElement> {}
+  extends FormHTMLAttributes<HTMLFormElement> {}
 
 const ChatUserMessageFormContent: FC<ChatUserMessageFormContentProps> = ({
   className,

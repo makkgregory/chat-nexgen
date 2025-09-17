@@ -1,4 +1,4 @@
-import type { MessagePart } from "@/components/chat/models/message";
+import type { MessagePart } from "../../models/message";
 import type { FC, HTMLAttributes } from "react";
 import { ChatMessageTextPart } from "./chat-message-text-part";
 

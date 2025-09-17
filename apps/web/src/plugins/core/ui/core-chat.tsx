@@ -40,7 +40,7 @@ import {
   ChatUserMessageFormInput,
   ChatUserMessageFormSubmit,
   ChatUserMessageParts,
-} from "@/components/chat";
+} from "@chat-ai/chat";
 import { cn } from "@chat-ai/ui";
 import type { FC, HTMLAttributes } from "react";
 import { WeatherPrompt } from "../prompts/weather-prompt";

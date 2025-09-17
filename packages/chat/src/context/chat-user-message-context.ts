@@ -1,7 +1,7 @@
 import type {
   MessagePart,
   UserMessage,
-} from "@/components/chat/models/message";
+} from "../models/message";
 import { createContext, use } from "react";
 
 export interface ChatUserMessageContext {

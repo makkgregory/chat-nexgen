@@ -1,4 +1,4 @@
-import { messageTextPart } from "@/components/chat/models/message";
+import { messageTextPart } from "../../models/message";
 import { cn, Textarea } from "@chat-ai/ui";
 import { debounce } from "lodash-es";
 import {

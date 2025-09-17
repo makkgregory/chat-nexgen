@@ -1,4 +1,4 @@
-import type { AssistantMessage } from "@/components/chat/models/message";
+import type { AssistantMessage } from "../models/message";
 import { createContext, use } from "react";
 
 export interface ChatAssistantMessageContext {

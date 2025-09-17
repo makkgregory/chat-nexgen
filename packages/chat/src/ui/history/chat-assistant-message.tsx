@@ -1,4 +1,4 @@
-import type { AssistantMessage } from "@/components/chat/models/message";
+import type { AssistantMessage } from "../../models/message";
 import { cn } from "@chat-ai/ui";
 import type { FC, HTMLAttributes } from "react";
 import { useChatAssistantMessage } from "../../context/chat-assistant-message-context";

@@ -1,4 +1,3 @@
-import plugins from "@/plugins";
 import { cn } from "@chat-ai/ui";
 import type { FC, HTMLAttributes } from "react";
 import ReactMarkdown from "react-markdown";
@@ -14,12 +13,7 @@ export const ChatMessageMarkdownPart: FC<ChatMessageMarkdownPartProps> = ({
 }) => {
   return (
     <div className={cn("prose-sm", className)} {...rest}>
-      <ReactMarkdown
-        children={content}
-        components={plugins.content}
-        remarkPlugins={plugins.remarkPlugins}
-        rehypePlugins={plugins.rehypePlugins}
-      />
+      <ReactMarkdown children={content} />
     </div>
   );
 };

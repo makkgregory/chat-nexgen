@@ -1,4 +1,4 @@
-import type { MessagePart } from "@/components/chat/models/message";
+import type { MessagePart } from "../models/message";
 import { createContext, use } from "react";
 
 export interface ChatPromptContext {
