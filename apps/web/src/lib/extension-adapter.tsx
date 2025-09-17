@@ -95,14 +95,16 @@ export class ExtensionPluginAdapter {
         plugin.composer = [];
         plugin.tools = [];
         plugin.content = {};
-        
+
         // For now, we'll add placeholder components
         if (extension.manifest.id === "example-dashboard") {
           plugin.content = {
             DashboardWidget: () => (
               <div className="p-4 border rounded-lg bg-background">
                 <h3 className="text-lg font-semibold mb-2">Dashboard Widget</h3>
-                <p className="text-muted-foreground">Loaded from extension system</p>
+                <p className="text-muted-foreground">
+                  Loaded from extension system
+                </p>
               </div>
             ),
           };
@@ -116,7 +118,9 @@ export class ExtensionPluginAdapter {
   /**
    * Convert extension routes to React Router routes
    */
-  private convertExtensionRoutes(extension: { manifest: { id: string } }): RouteObject[] {
+  private convertExtensionRoutes(extension: {
+    manifest: { id: string };
+  }): RouteObject[] {
     const routes: RouteObject[] = [];
 
     if (extension.manifest.id === "example-dashboard") {
@@ -145,21 +149,31 @@ export class ExtensionPluginAdapter {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="p-6 border rounded-lg bg-card">
                     <h2 className="text-xl font-semibold mb-4">Chart Widget</h2>
                     <div className="h-32 bg-muted rounded flex items-center justify-center">
-                      <span className="text-muted-foreground">Chart placeholder</span>
+                      <span className="text-muted-foreground">
+                        Chart placeholder
+                      </span>
                     </div>
                   </div>
-                  
+
                   <div className="p-6 border rounded-lg bg-card">
-                    <h2 className="text-xl font-semibold mb-4">Activity Widget</h2>
+                    <h2 className="text-xl font-semibold mb-4">
+                      Activity Widget
+                    </h2>
                     <div className="space-y-2">
                       <div className="text-sm">Recent activity:</div>
-                      <div className="text-xs text-muted-foreground">User logged in</div>
-                      <div className="text-xs text-muted-foreground">New order received</div>
-                      <div className="text-xs text-muted-foreground">Report generated</div>
+                      <div className="text-xs text-muted-foreground">
+                        User logged in
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        New order received
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        Report generated
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -168,33 +182,45 @@ export class ExtensionPluginAdapter {
           ),
         },
         {
-          path: "/analytics", 
+          path: "/analytics",
           Component: () => (
             <AppLayout>
               <div className="container mx-auto p-6">
                 <h1 className="text-3xl font-bold mb-6">Analytics</h1>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div className="p-6 border rounded-lg bg-card">
-                    <h2 className="text-xl font-semibold mb-4">Traffic Overview</h2>
+                    <h2 className="text-xl font-semibold mb-4">
+                      Traffic Overview
+                    </h2>
                     <div className="h-48 bg-muted rounded flex items-center justify-center">
-                      <span className="text-muted-foreground">Traffic chart placeholder</span>
+                      <span className="text-muted-foreground">
+                        Traffic chart placeholder
+                      </span>
                     </div>
                   </div>
-                  
+
                   <div className="p-6 border rounded-lg bg-card">
-                    <h2 className="text-xl font-semibold mb-4">Performance Metrics</h2>
+                    <h2 className="text-xl font-semibold mb-4">
+                      Performance Metrics
+                    </h2>
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
                         <span>Page Load Time:</span>
-                        <span className="font-semibold text-green-600">1.2s</span>
+                        <span className="font-semibold text-green-600">
+                          1.2s
+                        </span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span>Bounce Rate:</span>
-                        <span className="font-semibold text-orange-600">35%</span>
+                        <span className="font-semibold text-orange-600">
+                          35%
+                        </span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span>Conversion Rate:</span>
-                        <span className="font-semibold text-blue-600">3.2%</span>
+                        <span className="font-semibold text-blue-600">
+                          3.2%
+                        </span>
                       </div>
                     </div>
                   </div>

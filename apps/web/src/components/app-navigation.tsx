@@ -17,7 +17,7 @@ export function AppNavigation() {
           <div className="flex items-center space-x-2">
             <h1 className="text-lg font-semibold">Chat AI</h1>
           </div>
-          
+
           <div className="flex items-center space-x-1">
             {navigationItems.map((item) => (
               <Button

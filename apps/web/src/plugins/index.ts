@@ -1,5 +1,5 @@
-import type { Plugin } from "@/lib/plugin";
 import { extensionAdapter } from "@/lib/extension-adapter";
+import type { Plugin } from "@/lib/plugin";
 import core from "./core/";
 
 // Core plugins (always available)
@@ -9,11 +9,8 @@ const corePlugins: Plugin[] = [core];
 async function initializePlugins(): Promise<Required<Plugin>> {
   // Initialize extensions
   await extensionAdapter.initialize();
-  
-  const allPlugins = [
-    ...corePlugins,
-    ...extensionAdapter.getPlugins(),
-  ];
+
+  const allPlugins = [...corePlugins, ...extensionAdapter.getPlugins()];
 
   return {
     routes: allPlugins.flatMap((plugin) => plugin.routes ?? []),

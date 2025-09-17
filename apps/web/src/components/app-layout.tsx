@@ -9,9 +9,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       <AppNavigation />
-      <main className="container mx-auto">
-        {children}
-      </main>
+      <main className="container mx-auto">{children}</main>
     </div>
   );
 }

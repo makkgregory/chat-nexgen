@@ -13,12 +13,18 @@ async function loadExtensions() {
   try {
     const extendedPlugins = await initializePlugins();
     router = createBrowserRouter(extendedPlugins.routes);
-    
+
     // Re-render with updated router
     root.render(
       <StrictMode>
         <TRPCProvider>
-          <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading extensions...</div>}>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center min-h-screen">
+                Loading extensions...
+              </div>
+            }
+          >
             <RouterProvider router={router} />
           </Suspense>
         </TRPCProvider>
@@ -36,7 +42,13 @@ const root = createRoot(document.getElementById("root")!);
 root.render(
   <StrictMode>
     <TRPCProvider>
-      <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center min-h-screen">
+            Loading...
+          </div>
+        }
+      >
         <RouterProvider router={router} />
       </Suspense>
     </TRPCProvider>
