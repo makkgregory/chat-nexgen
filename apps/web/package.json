@@ -16,6 +16,7 @@
   "dependencies": {
     "@chat-ai/chat": "file:../../packages/chat",
     "@chat-ai/tailwind-config": "file:../../packages/tailwind-config",
+    "@chat-ai/trpc": "file:../../packages/trpc",
     "@chat-ai/ui": "file:../../packages/ui",
     "@tabler/icons-react": "^3.34.1",
     "@tailwindcss/vite": "^4.1.13",
