@@ -1,0 +1,24 @@
+{
+  "name": "@chat-ai/extension-dashboard-example",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@chat-ai/extension-system": "file:../../packages/extension-system",
+    "@chat-ai/ui": "file:../../packages/ui",
+    "react": "^19.1.1",
+    "react-router": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.10",
+    "@types/node": "^24.3.1",
+    "typescript": "~5.8.3"
+  }
+}

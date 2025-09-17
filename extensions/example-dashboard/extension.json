@@ -1,0 +1,41 @@
+{
+  "id": "dashboard-example",
+  "name": "Dashboard Example Extension",
+  "version": "1.0.0",
+  "description": "Example extension demonstrating dashboard widgets, pages, and API integration",
+  "author": "Chat AI Team",
+  "license": "MIT",
+  "keywords": ["dashboard", "widgets", "example"],
+  "capabilities": {
+    "client": {
+      "components": ["dashboard-widget", "stats-card", "chart-widget"],
+      "pages": ["dashboard-page", "analytics-page"],
+      "routes": ["dashboard-routes"],
+      "providers": ["dashboard-provider"]
+    },
+    "server": {
+      "routes": ["dashboard-api"],
+      "middleware": ["analytics-middleware"],
+      "services": ["analytics-service"]
+    }
+  },
+  "extensionPoints": [
+    {
+      "id": "dashboard-widget",
+      "name": "Dashboard Widget",
+      "description": "Widget that can be displayed on dashboards",
+      "type": "component"
+    },
+    {
+      "id": "analytics-data",
+      "name": "Analytics Data Provider",
+      "description": "Service that provides analytics data",
+      "type": "service"
+    }
+  ],
+  "consumes": ["sidebar-navigation", "theme-provider"],
+  "permissions": ["read:analytics", "write:dashboard"],
+  "main": "./dist/index.js",
+  "client": "./dist/client.js",
+  "server": "./dist/server.js"
+}
