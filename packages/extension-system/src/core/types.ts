@@ -171,3 +171,20 @@ export interface ExtensionContext {
     error: (message: string, ...args: any[]) => void;
   };
 }
+
+/**
+ * Application extension configuration
+ */
+export interface ExtensionConfig {
+  extensions: Array<{
+    name: string;
+    enabled: boolean;
+    path: string;
+    config?: Record<string, any>;
+  }>;
+  autoDiscovery: boolean;
+  development?: {
+    hotReload: boolean;
+    enableDebugMode: boolean;
+  };
+}

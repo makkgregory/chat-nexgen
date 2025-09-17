@@ -43,16 +43,19 @@ import {
 } from "@chat-ai/chat";
 import { cn } from "@chat-ai/ui";
 import type { FC, HTMLAttributes } from "react";
+import { AppLayout } from "../../../components/app-layout";
 import { WeatherPrompt } from "../prompts/weather-prompt";
 
 interface CoreChatProps extends HTMLAttributes<HTMLDivElement> {}
 
 export const CoreChat: FC<CoreChatProps> = ({ className, ...rest }) => {
   return (
-    <ChatRoot className={cn("", className)} {...rest}>
-      <CoreChatLanding />
-      <CoreChatLayout />
-    </ChatRoot>
+    <AppLayout>
+      <ChatRoot className={cn("h-[calc(100vh-3.5rem)]", className)} {...rest}>
+        <CoreChatLanding />
+        <CoreChatLayout />
+      </ChatRoot>
+    </AppLayout>
   );
 };
 
