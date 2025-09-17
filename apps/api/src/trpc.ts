@@ -1,5 +1,4 @@
-import { initTRPC } from '@trpc/server';
-import { z } from 'zod';
+import { initTRPC } from "@trpc/server";
 
 /**
  * Initialization of tRPC backend

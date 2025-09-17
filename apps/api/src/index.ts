@@ -1,7 +1,7 @@
-import Fastify from 'fastify';
-import { fastifyTRPCPlugin } from '@trpc/server/adapters/fastify';
-import cors from '@fastify/cors';
-import { appRouter } from './router';
+import cors from "@fastify/cors";
+import { fastifyTRPCPlugin } from "@trpc/server/adapters/fastify";
+import Fastify from "fastify";
+import { appRouter } from "./router";
 
 const server = Fastify({
   routerOptions: {
@@ -14,15 +14,15 @@ void server.register(cors, {
 });
 
 void server.register(fastifyTRPCPlugin, {
-  prefix: '/trpc',
+  prefix: "/trpc",
   trpcOptions: { router: appRouter },
 });
 
 const start = async () => {
   try {
     const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
-    const host = process.env.HOST || 'localhost';
-    
+    const host = process.env.HOST || "localhost";
+
     await server.listen({ port, host });
     console.log(`🚀 tRPC API server ready at http://${host}:${port}/trpc`);
   } catch (err) {

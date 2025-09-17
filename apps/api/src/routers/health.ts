@@ -1,10 +1,10 @@
-import { z } from 'zod';
-import { publicProcedure, router } from '../trpc';
+import { z } from "zod";
+import { publicProcedure, router } from "../trpc";
 
 export const healthRouter = router({
   check: publicProcedure.query(() => {
     return {
-      status: 'ok',
+      status: "ok",
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
     };

@@ -1,5 +1,5 @@
-import { z } from 'zod';
-import { publicProcedure, router } from '../trpc';
+import { z } from "zod";
+import { publicProcedure, router } from "../trpc";
 
 export const userRouter = router({
   getById: publicProcedure
@@ -14,9 +14,9 @@ export const userRouter = router({
 
   getAll: publicProcedure.query(() => {
     return [
-      { id: '1', name: 'Alice', email: 'alice@example.com' },
-      { id: '2', name: 'Bob', email: 'bob@example.com' },
-      { id: '3', name: 'Charlie', email: 'charlie@example.com' },
+      { id: "1", name: "Alice", email: "alice@example.com" },
+      { id: "2", name: "Bob", email: "bob@example.com" },
+      { id: "3", name: "Charlie", email: "charlie@example.com" },
     ];
   }),
 
@@ -33,7 +33,7 @@ export const userRouter = router({
         name: input.name,
         email: input.email,
       };
-      
+
       // In a real app, you would save this to a database
       return newUser;
     }),
